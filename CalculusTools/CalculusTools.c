@@ -129,7 +129,7 @@ int Differentiate(char *equationStr)
 	check(equation != NULL, INVALID_EQUATION);
 
 	result = DifferentiateEquation(equation, equationLen);
-	PrintEquation(result, equationLen); printf("\n"); // print equation doesn't add newline
+	PrintEquation(result, equationLen); printf("\n"); // PrintEquation doesn't add newline
 
 	free(result);
 	free(equation);
@@ -143,25 +143,35 @@ error:
 
 int IndefiniteIntegral(char *equationStr)
 {
+	Term *equation = NULL;
+	Term *result = NULL;
+
 	size_t equationLen;
-	Term *equation = StringToEquation(equationStr, &equationLen);
+	equation = StringToEquation(equationStr, &equationLen);
 	check(equation != NULL, INVALID_EQUATION);
 
-	PrintEquation(IntegrateEquation(equation, equationLen), equationLen); printf(" + C\n");
+	result = IntegrateEquation(equation, equationLen);
+	PrintEquation(result, equationLen); printf(" + C\n"); // PrintEquation doesn't add newl
 
+	free(equation);
+	free(result);
 	return 0;
 
 error:
+	free(equation);
+	free(result);
 	return 1;
 }
 
 int RiemannSum(RiemannTypes type, char *equationStr, double start, double end, unsigned long numIntervals)
 {
+	Term *equation = NULL;
+
 	check(equationStr != NULL, "equationStr can't be null.");
 	check(type < Other && type >= 0, "type was invalid.");
 
 	size_t equationLen;
-	Term *equation = StringToEquation(equationStr, &equationLen);
+	equation = StringToEquation(equationStr, &equationLen);
 	check(equation != NULL, INVALID_EQUATION);
 
 	int makeNegative = 0;
@@ -225,9 +235,11 @@ int RiemannSum(RiemannTypes type, char *equationStr, double start, double end, u
 
 	printf("%lf\n", result);
 
+	free(equation);
 	return 0;
 
 error:
+	free(equation);
 	return 1;
 }
 
@@ -236,15 +248,15 @@ int OneSidedLimit(double x, char *equationStr)
 	char *nextToken = NULL;
 	char *equationSep = ",";
 	
-	char *lessThanStr;
-	char *equalToStr;
-	char *greaterThanStr;
+	char *lessThanStr = NULL;
+	char *equalToStr = NULL;
+	char *greaterThanStr = NULL;
 
-	Term *lessThan;
+	Term *lessThan = NULL;
 	size_t lessThanLen = 0;
-	Term *equalTo;
+	Term *equalTo = NULL;
 	size_t equalToLen = 0;
-	Term *greaterThan;
+	Term *greaterThan = NULL;
 	size_t greaterThanLen = 0;
 
 	lessThanStr = strtok_s(equationStr, equationSep, &nextToken);
@@ -286,9 +298,15 @@ int OneSidedLimit(double x, char *equationStr)
 	check(FindY(equalTo, equalToLen, x, &atResult) == 0, "Error in FindY: %s", LibMathErr());
 	printf("f(%lf) = %lf\n", x, atResult);
 
+	free(lessThan);
+	free(equalTo);
+	free(greaterThan);
 	return 0;
 
 error:
+	free(lessThan);
+	free(equalTo);
+	free(greaterThan);
 	return 1;
 }
 
