@@ -1,0 +1,6 @@
+﻿  CalculusTools.c
+c:\programming projects\calculustools\calculustools\calculustools.c(250): warning C4145: '==': relational expression as switch expression; possible confusion with '='
+  Generating code
+  All 25 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  CalculusTools.vcxproj -> C:\Programming Projects\CalculusTools\x64\Release\CalculusTools.exe
