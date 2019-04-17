@@ -15,25 +15,44 @@
 #include <LibMath.h>
 #include <LibInput.h>
 
+#pragma region Macros
+
 #define check(A, B, ...) if (!(A))\
 {\
 	printf(B "\n", ##__VA_ARGS__);\
 	goto error;\
 }
 
+#pragma endregion
+
+#pragma region Warning and Error Strings
+
 #define INVALID "Invalid command. Type \"help\" for a list of commands."
 #define INVALID_USAGE "Invalid usage. Type \"help <commandName>\" for more info."
 #define INVALID_EQUATION "Equation was invalid. Type \"help <commandName> for more info.\""
 
+#pragma endregion
+
+#pragma region Command Strings
+
+// Command to find the y value at x of an equation
 #define Y_CMD "y"
+// Command to find the derivative of an equation
 #define DIFFERENTIATE_CMD "dxdy"
+// Command to find the indefinite integral of an equation
 #define INTEGRATE_CMD "S"
+// Command to find the riemann sum of an equation in a range
 #define RIEMANN_CMD	"riemann"
+// Command to find the one sided limit of a three part equation
 #define LIMIT_CMD "lim"
+// Command to show help for commands
 #define HELP_CMD "help"
-#define EXIT_CMD "exit"
+// Command to exit the program
+#define EXIT_CMD "exit" 
 
+#pragma endregion
 
+#pragma region Help Strings
 
 #define HELP_STR \
 "y <x> <equation>\n"\
@@ -89,12 +108,20 @@ char *functionHelp[] = {
 			"\t\tA simple equation composed of terms \"ax^b\" seperated by \" + \" or \" - \"\n"
 };
 
+#pragma endregion
+
+#pragma region Structs and Misc. Globals
+
 typedef enum RiemannTypes
 {
 	Right = 0, Left = 1, Midpoint = 2, Trapezoidal = 3, Other = 4
 } RiemannTypes;
 
 char *RiemannTypesStr[] = { "right", "left", "midpoint", "trapezoidal" };
+
+#pragma endregion
+
+#pragma region Command Functions
 
 int Y(double x, char *equationStr)
 {
@@ -327,6 +354,10 @@ int ShowHelp(char *functionName)
 	return 1;
 }
 
+#pragma endregion
+
+#pragma region Command handling
+
 int RunCommand(char *string)
 {
 	check(string != NULL, "string can't be null.");
@@ -438,6 +469,10 @@ error:
 	return 1;
 }
 
+#pragma endregion
+
+#pragma region Main
+
 int main(int argc, char *argv[])
 {
 	printf("CalculusTools v1.0.0\nCreated by MrBitShift\n");
@@ -467,3 +502,5 @@ error:
 #endif
 	return 1;
 }
+
+#pragma endregion
