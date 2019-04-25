@@ -1,3 +1,5 @@
+#pragma region Preprocessor
+
 #ifdef _DEBUG
 
 #define _CRTDBG_MAP_ALLOC
@@ -14,6 +16,8 @@
 #include <string.h>
 #include <LibMath.h>
 #include <LibInput.h>
+
+#pragma endregion
 
 #pragma region Macros
 
@@ -493,7 +497,7 @@ error:
 int main(int argc, char *argv[])
 {
 
-	printf("CalcCanary v1.1.0\nCreated by MrBitShift\nSee LICENSE for legal info.\n");
+	printf("CalcCanary v1.1.1 Release\nCreated by MrBitShift\nSee LICENSE for legal info.\n");
 
 	printf(CANARY_STR);
 
