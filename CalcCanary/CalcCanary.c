@@ -39,10 +39,13 @@
 
 #pragma region Command Strings
 
-// Command to show to logo
+// Command to show logo
 #define CANARY_CMD "canary"
 // Command to find the y value at x of an equation
 #define Y_CMD "y"
+
+#pragma region Calculus
+
 // Command to find the derivative of an equation
 #define DIFFERENTIATE_CMD "dxdy"
 // Command to find the indefinite integral of an equation
@@ -51,6 +54,19 @@
 #define RIEMANN_CMD	"riemann"
 // Command to find the one sided limit of a three part equation
 #define LIMIT_CMD "lim"
+
+
+#pragma endregion
+
+#pragma region Trig
+
+// Command to convert x,y to r,0
+#define POLAR_CMD "polar"
+// Command to convert r,0 to x,y
+#define RECTANGULAR_CMD "rect"
+
+#pragma endregion
+
 // Command to show help for commands
 #define HELP_CMD "help"
 // Command to exit the program
@@ -164,6 +180,8 @@ error:
 	free(equation);
 	return 1;
 }
+
+#pragma region Calculus
 
 int Differentiate(char *equationStr)
 {
@@ -353,6 +371,44 @@ error:
 	return 1;
 }
 
+#pragma endregion
+
+#pragma region Trig
+
+int ConvertToPolar(double x, double y)
+{
+	double r;
+	double theta;
+
+	check(RectangularToPolar(x, y, &r, &theta) == 0, 
+		"Failure in RectangularToPolar. Error: \"%s\"", LibMathErr());
+
+	printf("%lf, %lf\n", r, theta);
+
+	return 0;
+
+error:
+	return 1;
+}
+
+int ConvertToRectangular(double r, double theta)
+{
+	double x;
+	double y;
+
+	check(PolarToRectangular(r, theta, &x, &y) == 0,
+		"Failure in PolarToRectangular. Error: \"%s\"", LibMathErr());
+
+	printf("%lf, %lf\n", x, y);
+
+	return 0;
+
+error:
+	return 1;
+}
+
+#pragma endregion
+
 
 int ShowHelp(char *functionName)
 {
@@ -464,6 +520,42 @@ int RunCommand(char *string)
 		check(*equationStr != '\0', INVALID_USAGE);
 		OneSidedLimit(x, equationStr);
 	}
+	else if (strcmp(POLAR_CMD, command) == 0)
+	{
+		char *lastReadChar;
+		
+		double x, y;
+		char *xString;
+		xString = strtok_s(NULL, seperators, &nextToken);
+		check(xString != NULL, INVALID_USAGE);
+		x = strtod(xString, &lastReadChar);
+		check(*lastReadChar == '\0', INVALID_USAGE);
+
+		char *yString = nextToken;
+		check(*yString != '\0', INVALID_USAGE);
+		y = strtod(yString, &lastReadChar);
+		check(*lastReadChar == '\0', INVALID_USAGE);
+
+		ConvertToPolar(x, y);
+	}
+	else if (strcmp(RECTANGULAR_CMD, command) == 0)
+	{
+		char *lastReadChar;
+
+		double r, theta;
+		char *rString;
+		rString = strtok_s(NULL, seperators, &nextToken);
+		check(rString != NULL, INVALID_USAGE);
+		r = strtod(rString, &lastReadChar);
+		check(*lastReadChar == '\0', INVALID_USAGE);
+
+		char *thetaString = nextToken;
+		check(*thetaString != '\0', INVALID_USAGE);
+		theta = strtod(thetaString, &lastReadChar);
+		check(*lastReadChar == '\0', INVALID_USAGE);
+
+		ConvertToRectangular(r, theta);
+	}
 	else if (strcmp(HELP_CMD, command) == 0)
 	{
 		if (*nextToken != '\0')
@@ -497,7 +589,7 @@ error:
 int main(int argc, char *argv[])
 {
 
-	printf("CalcCanary v1.1.1 Release\nCreated by MrBitShift\nSee LICENSE for legal info.\n");
+	printf("CalcCanary v1.2.0\nCreated by MrBitShift\nSee LICENSE for legal info.\n");
 
 	printf(CANARY_STR);
 
