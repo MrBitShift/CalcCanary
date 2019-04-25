@@ -1,3 +1,0 @@
-﻿  CalculusTools.c
-c:\programming projects\calculustools\calculustools\calculustools.c(312): warning C4145: '==': relational expression as switch expression; possible confusion with '='
-  CalculusTools.vcxproj -> C:\Programming Projects\CalculusTools\Debug\CalculusTools.exe

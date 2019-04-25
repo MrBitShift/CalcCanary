@@ -1,8 +1,0 @@
-﻿  CalculusTools.c
-c:\programming projects\calculustools\calculustools\calculustools.c(312): warning C4145: '==': relational expression as switch expression; possible confusion with '='
-  Generating code
-  11 of 25 functions (44.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  CalculusTools.vcxproj -> C:\Programming Projects\CalculusTools\Release\CalculusTools.exe
