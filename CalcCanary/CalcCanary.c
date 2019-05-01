@@ -589,7 +589,7 @@ error:
 int main(int argc, char *argv[])
 {
 
-	printf("CalcCanary v1.2.0\nCreated by MrBitShift\nSee LICENSE for legal info.\n");
+	printf("CalcCanary v1.3.0\nCreated by MrBitShift\nSee LICENSE for legal info.\n");
 
 	printf(CANARY_STR);
 

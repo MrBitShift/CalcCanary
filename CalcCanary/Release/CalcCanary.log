@@ -1,8 +1,8 @@
 ﻿  CalcCanary.c
 c:\programming projects\calccanary\calccanary\calccanary.c(349): warning C4145: '==': relational expression as switch expression; possible confusion with '='
   Generating code
-  6 of 30 functions (20.0%) were compiled, the rest were copied from previous compilation.
-    4 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+  1 of 30 functions ( 3.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   CalcCanary.vcxproj -> C:\Programming Projects\CalcCanary\Release\CalcCanary.exe
